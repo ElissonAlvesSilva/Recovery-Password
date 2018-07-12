@@ -1,14 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
+import { RecoveryComponent } from './recovery/recovery.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+
+import { MaterializeModule } from 'angular2-materialize';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RecoveryComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpModule,
+    AppRoutingModule,
+    MaterializeModule
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]
