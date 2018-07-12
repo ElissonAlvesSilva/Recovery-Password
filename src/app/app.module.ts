@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { RecoveryComponent } from './recovery/recovery.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import * as M from "materialize-css/dist/js/materialize";
 
 import { MaterializeModule } from 'angular2-materialize';
 
@@ -18,8 +19,8 @@ import { MaterializeModule } from 'angular2-materialize';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    MaterializeModule,
     AppRoutingModule,
-    MaterializeModule
  
   ],
   providers: [],
