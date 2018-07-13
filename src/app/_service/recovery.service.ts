@@ -14,8 +14,8 @@ export class RecoveryService {
 
   resetPasswordWeb(_user: User, _token: String) {
     let content = JSON.stringify({
-      password: _user.password,
-      c_password: _user.c_password
+      senha: _user.password,
+      c_senha: _user.c_password
     });
     return this._http.post(`${API}/usuarios/alterar_senha/${_token}`, content, this.setHeaders())
       .toPromise()
@@ -25,8 +25,8 @@ export class RecoveryService {
   }
   resetPasswordApp(_user: User, _token: String) {
     let content = JSON.stringify({
-      password: _user.password,
-      c_password: _user.c_password
+      senha: _user.password,
+      c_senha: _user.c_password
     });
     return this._http.post(`${API}/candidatos/alterar_senha/${_token}`, content, this.setHeaders())
       .toPromise()

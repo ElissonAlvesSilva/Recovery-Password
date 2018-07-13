@@ -45,7 +45,6 @@ export class RecoveryComponent implements OnInit {
   ngOnInit() {
     this._user = new User();
     this._activatedRoute.params.subscribe(param => {
-      console.log(this.parseDate(JWT(param.token).expire_in));
       if (this.parseDate(JWT(param.token).expire_in) > this.parseDate(new Date().toString())) {
 
       } else {
@@ -78,7 +77,6 @@ export class RecoveryComponent implements OnInit {
             this.message = 'Sucesso ao alterar a senha do aplicativo RH Mobi';
           })
           .catch(erro => {
-            console.log(erro);
             this.reset = true;
             this.back = true;
             this.message = 'Erro ao alterar a senha do aplicativo RH Mobi';
