@@ -1,23 +1,58 @@
-<nav>
-  <div class="nav-wrapper">
-    <a href="#" class="brand-logo">Recuperação de Senha</a>
-  </div>
-</nav>
-
-<div class="container">
+<div class="container card-rec" *ngIf="!reset">
   <div class="row">
-    <div class="col s12 m12 l12">
-      <h2 class="header">Recuperação de Senha RH Mobi</h2>
+    <div class="col s12 m12 l12 form ">
       <div class="card horizontal">
-        <div class="card-image">
-          <img src="https://lorempixel.com/100/190/nature/6">
+        <div class="card-stacked">
+          <form [formGroup]="_formPassword" (ngSubmit)="resetPassword()" name="formCad.form.valid">
+            <div class="card-content">
+              <div class="header-mark"></div>
+              <div class="logo">
+                <img src="/assets/grupohunt.png" alt="grupo hunt logo" srcset="">
+              </div>
+              <div class="title-card">
+                <h3>Recuperação de Senha</h3>
+                <p>Digite abaixo a nova senha para acesso ao RH Mobi</p>
+              </div>
+              <div class="row inputs">
+                <div class="col s12 input-field">
+                  <input id="password" type="password" class="validate" formControlName="password" [(ngModel)]="_user.password">
+                  <label for="password">Senha</label>
+                </div>
+                <div class="col s12 input-field">
+                  <input id="c_password" type="password" class="validate" formControlName="c_password" [(ngModel)]="_user.c_password">
+                  <label for="c_password">Confirmar Senha</label>
+                  <span *ngIf="_formPassword.getError('passwordNotEqual',['c_password']) as error" style="color: red">Senhas diferentes</span>
+                </div>
+              </div>
+
+            </div>
+            <div class="card-action">
+              <input type="submit" [disabled]="!_formPassword.valid" value="Salvar">
+            </div>
+          </form>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container card-rec" *ngIf="reset">
+  <div class="row">
+    <div class="col s12 m12 l12 form ">
+      <div class="card horizontal">
         <div class="card-stacked">
           <div class="card-content">
-            <p>I am a very simple card. I am good at containing small bits of information.</p>
+            <div class="header-mark"></div>
+            <div class="logo">
+              <img src="/assets/grupohunt.png" alt="grupo hunt logo" srcset="">
+            </div>
+            <div class="title-card">
+              <h3>Recuperação de Senha</h3>
+              <p [ngStyle]="{'color': back === true || expire_in === true ? 'red':''}" >{{ message }}</p>
+            </div>
           </div>
-          <div class="card-action">
-            <a href="#">This is a link</a>
+          <div class="card-action" *ngIf="back">
+            <a (click)="back_form()">Voltar</a>
           </div>
         </div>
       </div>

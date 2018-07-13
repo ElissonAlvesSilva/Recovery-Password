@@ -1,4 +1,4 @@
-import { API } from './../_const/const.const';
+import { API } from '../_const/const.const';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions, ResponseContentType } from '@angular/http';
 import { User } from '../_model/user.model';
@@ -13,24 +13,31 @@ export class RecoveryService {
   }
 
   resetPasswordWeb(_user: User, _token: String) {
-    return this._http.post(`${API}/usuarios`, _user, this.setHeaders(_token))
+    let content = JSON.stringify({
+      password: _user.password,
+      c_password: _user.c_password
+    });
+    return this._http.post(`${API}/usuarios/alterar_senha/${_token}`, content, this.setHeaders())
       .toPromise()
       .then(response => {
         return response.json();
       });
   }
   resetPasswordApp(_user: User, _token: String) {
-    return this._http.post(`${API}/candidatos`, _user, this.setHeaders(_token))
+    let content = JSON.stringify({
+      password: _user.password,
+      c_password: _user.c_password
+    });
+    return this._http.post(`${API}/candidatos/alterar_senha/${_token}`, content, this.setHeaders())
       .toPromise()
       .then(response => {
         return response.json();
       });
   }
 
-  private setHeaders(_token) {
+  private setHeaders() {
     const headers = new Headers({ 'Content-type': 'application/json' });
     headers.append('Access-Control-Allow-Origin', '*');
-    headers.append('x-access-token', _token);
     return new RequestOptions({ headers: headers });
   }
 }
