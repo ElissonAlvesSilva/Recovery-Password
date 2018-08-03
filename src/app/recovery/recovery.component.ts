@@ -45,13 +45,22 @@ export class RecoveryComponent implements OnInit {
   ngOnInit() {
     this._user = new User();
     this._activatedRoute.params.subscribe(param => {
-      if (this.parseDate(JWT(param.token).expire_in) > this.parseDate(new Date().toString())) {
+      this._recoveryService.isValidToken(param.token).then(sucess => {
+        if (this.parseDate(JWT(param.token).expire_in) > this.parseDate(new Date().toString())) {
 
-      } else {
-        this.reset = true;
-        this.expire_in = true;
-        this.message = 'Token expirado, por favor solicite novamente a recuperação de senha.';
-      }
+        } else {
+          this.reset = true;
+          this.expire_in = true;
+          this.message = 'Token expirado, por favor solicite novamente a recuperação de senha.';
+        }
+      }).catch(err => {
+
+          if (err.status === 404) {
+            this.reset = true;
+            this.message = 'Você já alterou sua senha. Caso tenha esquecido a nova senha, solicite novamente.';
+          }
+        });
+
     });
 
   }

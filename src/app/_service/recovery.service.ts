@@ -35,6 +35,14 @@ export class RecoveryService {
       });
   }
 
+  isValidToken(_token) {
+    return this._http.get(`${API}/candidatos/alterar_senha/${_token}`, this.setHeaders())
+      .toPromise()
+      .then(response => {
+        return response.json();
+      });
+  }
+
   private setHeaders() {
     const headers = new Headers({ 'Content-type': 'application/json' });
     headers.append('Access-Control-Allow-Origin', '*');
